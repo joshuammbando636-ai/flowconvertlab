@@ -133,7 +133,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 color: "var(--text)",
                 // @ts-ignore
                 "--tw-prose-headings": "var(--text)",
-                "--tw-prose-links": "#FF6B00",
+                "--tw-prose-links": "var(--accent)",
                 "--tw-prose-bold": "var(--text)",
               }}
               dangerouslySetInnerHTML={{ __html: html }}

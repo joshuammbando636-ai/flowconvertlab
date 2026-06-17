@@ -80,7 +80,7 @@ export function BlogToc({ items }: { items: TocItem[] }) {
                   style={{
                     width: active ? 6 : 0,
                     height: active ? 6 : 0,
-                    background: "#FF6B00",
+                    background: "var(--accent)",
                   }}
                 />
                 <a

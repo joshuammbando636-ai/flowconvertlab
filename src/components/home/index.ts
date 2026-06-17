@@ -1,6 +1,10 @@
-// src/components/home/index.ts
-export { Hero } from './Hero';
-export { Features } from './Features';
-export { Testimonials } from './Testimonials';
-export { Pricing } from './Pricing';
-export { FinalCTA } from './FinalCTA';
+export { Hero } from "./Hero";
+export { TrustStrip } from "./TrustStrip";
+export { StatBand } from "./StatBand";
+export { ProblemSolution } from "./ProblemSolution";
+export { Features } from "./Features";
+export { HowItWorks } from "./HowItWorks";
+export { WhyLiveChat } from "./WhyLiveChat";
+export { ReviewsTeaser } from "./ReviewsTeaser";
+export { FAQ } from "./FAQ";
+export { FinalCTA } from "./FinalCTA";

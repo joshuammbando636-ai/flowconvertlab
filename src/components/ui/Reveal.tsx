@@ -10,6 +10,8 @@ interface RevealProps {
   delay?: number;
   /** Render element tag. Defaults to div. */
   as?: keyof React.JSX.IntrinsicElements;
+  /** Extra inline styles (merged with the transition-delay). */
+  style?: React.CSSProperties;
 }
 
 /**
@@ -17,7 +19,7 @@ interface RevealProps {
  * viewport (one-shot). Only animates opacity + transform, and is fully
  * disabled by the prefers-reduced-motion rule in globals.css.
  */
-export function Reveal({ children, className, delay = 0, as = "div" }: RevealProps) {
+export function Reveal({ children, className, delay = 0, as = "div", style }: RevealProps) {
   const ref = useRef<HTMLElement | null>(null);
   const [visible, setVisible] = useState(false);
 
@@ -44,7 +46,7 @@ export function Reveal({ children, className, delay = 0, as = "div" }: RevealPro
     <Tag
       ref={ref}
       className={cn("reveal", visible && "is-visible", className)}
-      style={delay ? { transitionDelay: `${delay}ms` } : undefined}
+      style={{ ...style, ...(delay ? { transitionDelay: `${delay}ms` } : {}) }}
     >
       {children}
     </Tag>

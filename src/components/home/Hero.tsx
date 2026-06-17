@@ -1,166 +1,109 @@
-"use client";
-
-import { useRef } from "react";
-import { gsap } from "gsap";
-import { SplitText } from "gsap/SplitText";
-import { useGSAP } from "@gsap/react";
-import { ArrowRight } from "lucide-react";
-import Link from "next/link";
-import Image from "next/image";
-
-gsap.registerPlugin(SplitText);
+import { Reveal } from "@/components/ui/Reveal";
+import { CTAButton } from "@/components/ui/CTAButton";
+import { CTA_SECONDARY_LABEL, AFFILIATE_DISCLOSURE_SHORT } from "@/lib/constants";
+import { Bot, MessageSquare } from "lucide-react";
 
 export function Hero() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const subtitleRef = useRef<HTMLParagraphElement>(null);
-  const ctaRef = useRef<HTMLDivElement>(null);
-
-  useGSAP(() => {
-    // Split the title text into words
-    const split = new SplitText(titleRef.current, {
-      type: "words",
-    });
-
-    // Title words animation - plays immediately on load
-    gsap.fromTo(
-      split.words,
-      { 
-        y: 80, 
-        opacity: 0,
-      },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 1,
-        ease: "power3.out",
-        stagger: 0.05,
-      }
-    );
-
-    // Subtitle animation - smooth fade up
-    gsap.fromTo(
-      subtitleRef.current,
-      { y: 40, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 1,
-        ease: "power3.out",
-        delay: 0.4,
-      }
-    );
-
-    // CTA animation - gentle fade in
-    gsap.fromTo(
-      ctaRef.current,
-      { y: 30, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.9,
-        ease: "power3.out",
-        delay: 0.7,
-      }
-    );
-
-    // Cleanup
-    return () => {
-      split.revert();
-    };
-  }, { scope: containerRef });
-
   return (
     <section
-      ref={containerRef}
-      className="relative w-screen h-screen overflow-hidden"
-      style={{ 
-        marginLeft: "calc(-50vw + 50%)",
-        marginRight: "calc(-50vw + 50%)",
-      }}
+      className="relative overflow-hidden"
+      style={{ paddingTop: "calc(var(--nav-height) + 3rem)" }}
     >
-      {/* Full Background Image */}
-      <div className="absolute inset-0 z-0">
-        <Image
-          src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1920&q=80"
-          alt="Support team helping customers online"
-          fill
-          className="object-cover"
-          priority
-          sizes="100vw"
-        />
-        {/* Dark overlay for text readability */}
-        <div 
-          className="absolute inset-0"
-          style={{ 
-            background: "linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.2) 100%)",
-          }}
-        />
-      </div>
-
-      {/* Content - Centered on image */}
-      <div className="relative z-10 h-full w-full flex items-center justify-center">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          
-          <h1
-            ref={titleRef}
-            className="font-bold tracking-tight text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.15] mb-6 text-white"
-          >
-            Turn LiveChat{" "}
-            <span 
-              className="inline-block px-4 sm:px-6 py-1 sm:py-2 rounded-full font-bold mx-1 my-1"
-              style={{ 
-                backgroundColor: "#FF6B00",
-                fontSize: "inherit",
-                color: "white"
-              }}
-            >
-              Conversations
-            </span>
-            <br />
-            Into Revenue
-          </h1>
-
-          <p
-            ref={subtitleRef}
-            className="text-base sm:text-lg md:text-xl max-w-2xl mx-auto mb-8 leading-relaxed text-white/90"
-          >
-            One clean branded resource hub. Share in a single click. 
-            Turn every support conversation into a conversion opportunity.
-          </p>
-
-          <div
-            ref={ctaRef}
-            className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4"
-          >
-            <a
-              href="https://www.livechat.com/?a=w9-h_vpDg&utm_campaign=pp_livechat-default&utm_source=PP"
-              target="_blank"
-              rel="sponsored nofollow noopener"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg font-semibold text-white transition-all hover:shadow-lg hover:scale-105"
+      {/* Soft accent wash, decorative only */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-10"
+        style={{
+          background:
+            "radial-gradient(60% 50% at 70% 0%, var(--accent-soft) 0%, transparent 70%)",
+        }}
+      />
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pb-16 sm:pb-20 lg:pb-24">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* Copy */}
+          <Reveal>
+            <span className="section-label mb-5">Live chat + AI chatbot, in one platform</span>
+            <h1
+              className="font-display font-bold mt-5"
               style={{
-                background: "#FF6B00",
-                boxShadow: "0 4px 20px rgba(255,107,0,0.4)"
+                fontSize: "clamp(2.25rem, 5.5vw, 3.75rem)",
+                lineHeight: "1.08",
+                letterSpacing: "-0.025em",
+                color: "var(--text)",
               }}
             >
-              Start Free Trial <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
-            </a>
-            
-            <Link
-              href="/tools"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg font-medium text-white transition-all hover:bg-white/10"
-              style={{ 
-                border: "1px solid rgba(255,255,255,0.3)",
-                backdropFilter: "blur(8px)"
-              }}
+              Turn website visitors into customers — automatically
+            </h1>
+            <p
+              className="mt-5 text-base sm:text-lg leading-relaxed max-w-xl"
+              style={{ color: "var(--text-muted)" }}
             >
-              Explore Tools
-            </Link>
-          </div>
+              Add LiveChat&apos;s AI chatbot and live chat to your site in minutes. Every
+              visitor gets an instant answer, every lead gets captured, and your team only
+              handles the conversations that actually matter.
+            </p>
 
-          <p className="text-xs sm:text-sm mt-6 sm:mt-8 text-white/60">
-            14-day free trial · No credit card required · Powered by LiveChat
-          </p>
+            <div className="mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4">
+              <CTAButton size="lg" />
+              <a
+                href="#how-it-works"
+                className="inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 sm:py-4 text-base font-semibold border transition-all duration-200 hover:-translate-y-0.5"
+                style={{ borderColor: "var(--border)", color: "var(--text)", background: "var(--bg-elevated)" }}
+              >
+                {CTA_SECONDARY_LABEL}
+              </a>
+            </div>
+
+            <p className="mt-5 text-sm" style={{ color: "var(--text-muted)" }}>
+              No credit card required · ~10-minute setup · Works with WordPress, Shopify &amp; 200+ tools
+            </p>
+            <p className="mt-2 text-xs" style={{ color: "var(--text-muted)" }}>
+              {AFFILIATE_DISCLOSURE_SHORT}
+            </p>
+          </Reveal>
+
+          {/* UI mockup (no stock photo) */}
+          <Reveal delay={120} className="lg:justify-self-end w-full max-w-md mx-auto">
+            <div
+              className="rounded-2xl border p-5 sm:p-6"
+              style={{ background: "var(--bg-elevated)", borderColor: "var(--border)", boxShadow: "0 24px 60px rgba(11,18,32,0.10)" }}
+            >
+              <div className="flex items-center gap-2 pb-4 mb-4 border-b" style={{ borderColor: "var(--border)" }}>
+                <span className="w-2.5 h-2.5 rounded-full" style={{ background: "var(--accent)" }} />
+                <span className="text-sm font-semibold" style={{ color: "var(--text)" }}>Chat with us</span>
+                <span className="ml-auto text-xs px-2 py-0.5 rounded-full" style={{ background: "var(--accent-soft)", color: "var(--accent)" }}>Online</span>
+              </div>
+
+              <div className="space-y-3">
+                <div className="flex items-start gap-2">
+                  <span className="mt-0.5 w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: "var(--accent-soft)" }}>
+                    <Bot className="w-4 h-4" style={{ color: "var(--accent)" }} />
+                  </span>
+                  <p className="text-sm rounded-2xl rounded-tl-sm px-3.5 py-2.5 max-w-[80%]" style={{ background: "var(--bg-surface)", color: "var(--text)" }}>
+                    Hi! 👋 Looking for the right plan? I can help you find it in 30 seconds.
+                  </p>
+                </div>
+                <div className="flex items-start gap-2 justify-end">
+                  <p className="text-sm rounded-2xl rounded-tr-sm px-3.5 py-2.5 max-w-[80%] text-white" style={{ background: "var(--accent)" }}>
+                    Do you integrate with Shopify?
+                  </p>
+                </div>
+                <div className="flex items-start gap-2">
+                  <span className="mt-0.5 w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: "var(--accent-soft)" }}>
+                    <Bot className="w-4 h-4" style={{ color: "var(--accent)" }} />
+                  </span>
+                  <p className="text-sm rounded-2xl rounded-tl-sm px-3.5 py-2.5 max-w-[80%]" style={{ background: "var(--bg-surface)", color: "var(--text)" }}>
+                    Yes — plus 200+ more. Want me to connect you to a specialist?
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-4 flex items-center gap-2 rounded-full border px-4 py-2.5" style={{ borderColor: "var(--border)" }}>
+                <MessageSquare className="w-4 h-4" style={{ color: "var(--text-muted)" }} />
+                <span className="text-sm" style={{ color: "var(--text-muted)" }}>Type your message…</span>
+              </div>
+            </div>
+          </Reveal>
         </div>
       </div>
     </section>

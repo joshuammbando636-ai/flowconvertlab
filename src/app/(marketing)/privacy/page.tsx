@@ -1,7 +1,10 @@
 // app/(marketing)/privacy/page.tsx
+import { AFFILIATE_DISCLOSURE_PRIVACY } from "@/lib/constants";
+
 export const metadata = {
   title: "Privacy Policy | FlowconvertLab",
   description: "Privacy Policy for FlowconvertLab - Learn how we collect, use, and protect your personal information.",
+  alternates: { canonical: "https://www.flowconvertlab.com/privacy" },
 };
 
 export default function PrivacyPage() {
@@ -39,7 +42,7 @@ export default function PrivacyPage() {
             font-family: Arial !important;
           }
           [data-custom-class='link'], [data-custom-class='link'] * {
-            color: #FF6B00 !important;
+            color: var(--accent) !important;
             font-size: 14px !important;
             font-family: Arial !important;
             word-break: break-word !important;
@@ -61,7 +64,7 @@ export default function PrivacyPage() {
             color: var(--text);
           }
           .privacy-policy-container a {
-            color: #FF6B00 !important;
+            color: var(--accent) !important;
             text-decoration: none;
           }
           .privacy-policy-container a:hover {
@@ -112,6 +115,15 @@ export default function PrivacyPage() {
             </div>
 
             <div style={{ lineHeight: "1.5" }}><br /></div>
+            <div style={{ lineHeight: "1.5" }}><br /></div>
+
+            <div style={{ lineHeight: "1.5", padding: "1rem 1.25rem", borderRadius: "0.75rem", background: "var(--accent-soft)", border: "1px solid color-mix(in srgb, var(--accent) 25%, transparent)" }}>
+              <strong><span style={{ fontSize: "15px" }}><span data-custom-class="heading_2">Affiliate Disclosure</span></span></strong>
+              <div style={{ marginTop: "0.5rem" }}>
+                <span style={{ fontSize: "15px" }}><span data-custom-class="body_text">{AFFILIATE_DISCLOSURE_PRIVACY}</span></span>
+              </div>
+            </div>
+
             <div style={{ lineHeight: "1.5" }}><br /></div>
 
             <div style={{ lineHeight: "1.5" }}>
@@ -828,7 +840,7 @@ export default function PrivacyPage() {
   <span style={{ fontSize: "15px" }}>
     <span style={{ color: "rgb(127, 127, 127)" }}>
       <span data-custom-class="body_text">
-        <strong>Questions or concerns? </strong>Reading this Privacy Notice will help you understand your privacy rights and choices. We are responsible for making decisions about how your personal information is processed. If you do not agree with our policies and practices, please do not use our Services. If you still have any questions or concerns, please contact us at <a href="mailto:info@flowconvertlab.com" className="question noTranslate" style={{ color: "#FF6B00", textDecoration: "none" }}>info@flowconvertlab.com</a>.
+        <strong>Questions or concerns? </strong>Reading this Privacy Notice will help you understand your privacy rights and choices. We are responsible for making decisions about how your personal information is processed. If you do not agree with our policies and practices, please do not use our Services. If you still have any questions or concerns, please contact us at <a href="mailto:info@flowconvertlab.com" className="question noTranslate" style={{ color: "var(--accent)", textDecoration: "none" }}>info@flowconvertlab.com</a>.
       </span>
     </span>
   </span>

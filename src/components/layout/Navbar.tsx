@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 import { CTAButton } from "@/components/ui/CTAButton";
 
 const NAV_LINKS = [
+  { href: "/", label: "Home" },
   { href: "/tools", label: "Tools" },
   { href: "/reviews", label: "Reviews" },
   { href: "/comparison", label: "Comparison" },
@@ -63,7 +64,7 @@ export function Navbar() {
 
         {/* Desktop CTA */}
         <div className="hidden md:block">
-          <CTAButton size="md">Start free trial</CTAButton>
+          <CTAButton size="md">Start Free Trial</CTAButton>
         </div>
 
         {/* Mobile toggle */}
@@ -98,7 +99,7 @@ export function Navbar() {
             </Link>
           ))}
           <CTAButton size="md" className="mt-2 w-full">
-            Start free trial
+            Start Free Trial
           </CTAButton>
         </div>
       )}

@@ -1,36 +1,20 @@
 import Link from "next/link";
 import { AFFILIATE_DISCLOSURE_FULL } from "@/lib/constants";
 
-const COLUMNS: { title: string; links: { href: string; label: string }[] }[] = [
-  {
-    title: "Product",
-    links: [
-      { href: "/tools", label: "Tools" },
-      { href: "/comparison", label: "Comparison" },
-      { href: "/reviews", label: "Reviews" },
-    ],
-  },
-  {
-    title: "Learn",
-    links: [
-      { href: "/guide", label: "Guide" },
-      { href: "/blog", label: "Blog" },
-    ],
-  },
-  {
-    title: "Legal",
-    links: [
-      { href: "/privacy", label: "Privacy Policy" },
-      { href: "/terms", label: "Terms" },
-    ],
-  },
+const QUICK_LINKS = [
+  { href: "/", label: "Home" },
+  { href: "/tools", label: "Tools" },
+  { href: "/reviews", label: "Reviews" },
+  { href: "/comparison", label: "Comparison" },
+  { href: "/guide", label: "Guide" },
+  { href: "/blog", label: "Blog" },
 ];
 
 export function Footer() {
   return (
     <footer className="relative pt-16 sm:pt-20 pb-8 text-white" style={{ background: "#0B1220" }}>
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row justify-between gap-10 lg:gap-16">
+        <div className="grid gap-10 lg:gap-16 md:grid-cols-[1.4fr_1fr_1fr]">
           {/* Brand */}
           <div className="max-w-sm">
             <Link href="/" className="flex items-center gap-2 font-display font-bold text-xl">
@@ -38,37 +22,49 @@ export function Footer() {
               FlowconvertLab
             </Link>
             <p className="text-sm text-white/60 mt-4 leading-relaxed">
-              Turn your website chats into a branded hub that turns visitors into customers —
-              powered by LiveChat.
+              Turn customer conversations into revenue with AI-powered live chat.
             </p>
-            <a
-              href="mailto:info@flowconvertlab.com"
-              className="inline-block text-sm text-white/70 hover:text-white transition-colors mt-4"
-            >
-              info@flowconvertlab.com
-            </a>
           </div>
 
-          {/* Link columns */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 sm:gap-12">
-            {COLUMNS.map((col) => (
-              <div key={col.title}>
-                <p className="text-xs font-semibold uppercase tracking-widest text-white/40 mb-4">
-                  {col.title}
-                </p>
-                <div className="flex flex-col gap-2.5">
-                  {col.links.map((link) => (
-                    <Link
-                      key={link.href}
-                      href={link.href}
-                      className="text-sm text-white/70 hover:text-white transition-colors"
-                    >
-                      {link.label}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            ))}
+          {/* Quick links */}
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-widest text-white/40 mb-4">
+              Quick links
+            </p>
+            <div className="grid grid-cols-2 gap-x-6 gap-y-2.5">
+              {QUICK_LINKS.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="text-sm text-white/70 hover:text-white transition-colors"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Contact */}
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-widest text-white/40 mb-4">
+              Contact
+            </p>
+            <div className="flex flex-col gap-2.5">
+              <a
+                href="mailto:info@flowconvertlab.com"
+                className="text-sm text-white/70 hover:text-white transition-colors"
+              >
+                info@flowconvertlab.com
+              </a>
+              <a
+                href="https://www.pinterest.com/flowconvertlab"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-white/70 hover:text-white transition-colors"
+              >
+                Pinterest: @flowconvertlab
+              </a>
+            </div>
           </div>
         </div>
 
@@ -77,9 +73,12 @@ export function Footer() {
           {AFFILIATE_DISCLOSURE_FULL}
         </p>
 
-        <div className="mt-4 flex flex-col sm:flex-row justify-between gap-3 text-xs text-white/40">
+        <div className="mt-4 flex flex-col sm:flex-row items-start sm:items-center gap-2 text-xs text-white/40">
           <span>© 2026 FlowconvertLab. All rights reserved.</span>
-          <span>Not affiliated with or endorsed by LiveChat beyond its partner program.</span>
+          <span className="hidden sm:inline">·</span>
+          <Link href="/privacy" className="hover:text-white transition-colors">
+            Privacy Policy
+          </Link>
         </div>
       </div>
     </footer>

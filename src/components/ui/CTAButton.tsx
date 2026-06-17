@@ -1,6 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { AFFILIATE_URL, AFFILIATE_REL } from "@/lib/constants";
+import { AFFILIATE_URL, AFFILIATE_REL, CTA_PRIMARY_LABEL } from "@/lib/constants";
 
 interface CTAButtonProps {
   children?: React.ReactNode;
@@ -23,7 +23,7 @@ const sizes = {
  * required target/rel. Reuse everywhere a "start free trial" CTA is needed.
  */
 export function CTAButton({
-  children = "Start free trial",
+  children = CTA_PRIMARY_LABEL,
   href = AFFILIATE_URL,
   variant = "primary",
   size = "lg",

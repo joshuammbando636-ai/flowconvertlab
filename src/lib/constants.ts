@@ -2,13 +2,25 @@
 export const AFFILIATE_URL =
   "https://www.livechat.com/?a=w9-h_vpDg&utm_campaign=pp_livechat-default&utm_source=PP";
 
+/** LiveChat's public pricing page — link here instead of hard-coding prices. */
+export const LIVECHAT_PRICING_URL = "https://www.livechat.com/pricing/";
+
 /** Attributes required on every affiliate / outbound CTA. */
 export const AFFILIATE_REL = "sponsored nofollow noopener";
 
-/** Short disclosure to place near major CTAs. */
-export const AFFILIATE_DISCLOSURE_SHORT =
-  "We earn a commission if you sign up through our link, at no extra cost to you.";
+/** Reusable CTA labels (from the copy deck). */
+export const CTA_PRIMARY_LABEL = "Start your free 14-day trial";
+export const CTA_SECONDARY_LABEL = "See how it works";
+export const CTA_MICROCOPY = "No credit card required · Live in ~10 minutes";
 
-/** Full disclosure for the footer. */
+/** Short disclosure to place near major CTAs (copy deck). */
+export const AFFILIATE_DISCLOSURE_SHORT =
+  "Affiliate link — we may earn a commission, at no extra cost to you.";
+
+/** Full disclosure for the footer, site-wide (copy deck). */
 export const AFFILIATE_DISCLOSURE_FULL =
-  "FlowconvertLab earns a commission when you sign up for LiveChat through our links, at no extra cost to you. Our recommendations are our own.";
+  "FlowconvertLab is an independent site and a LiveChat affiliate. When you sign up through our links, we may earn a commission — at no extra cost to you. We only recommend tools we'd actually use.";
+
+/** Full disclosure for the Privacy page (copy deck). */
+export const AFFILIATE_DISCLOSURE_PRIVACY =
+  "FlowconvertLab is an independent website and participates in the LiveChat affiliate program. When you click our links and sign up, we may earn a commission at no additional cost to you. This never affects our opinions — we only recommend tools we believe deliver real value.";

@@ -63,10 +63,11 @@ export function BubbleNav() {
     if (open) panelRef.current?.querySelector<HTMLElement>("a, button")?.focus();
   }, [open]);
 
-  // Spring drives the morph (open + contract). No idle bounce.
+  // Smooth morph for open + contract. Springy on open, settles cleanly
+  // on close (higher damping = natural recovery, minimal overshoot).
   const spring = reduce
     ? { duration: 0.2 }
-    : { type: "spring" as const, stiffness: 300, damping: 24 };
+    : { type: "spring" as const, stiffness: 260, damping: 30, mass: 0.9 };
 
   // Inline links show only at the top of the page on desktop
   const showInline = !scrolled;
@@ -76,6 +77,7 @@ export function BubbleNav() {
       <motion.div
         layout={!reduce}
         transition={spring}
+        animate={{ borderRadius: open ? 20 : 999 }}
         className="glass-nav overflow-hidden"
         style={{
           borderRadius: 999,

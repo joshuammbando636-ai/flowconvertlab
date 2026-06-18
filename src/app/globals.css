@@ -6,13 +6,13 @@
    Warm, blended look. Neutral warm base + ONE swappable brand accent.
    Swap --accent (and hover/soft/glow) to the logo color to rebrand. */
 :root {
-  --bg: #F4F1EC;           /* warm off-white base (not pure white) */
-  --bg-alt: #ECE7DE;       /* subtle deeper tone for alternating sections */
-  --surface: #FBF9F5;      /* cards, gently lifted */
-  --bg-dark: #211E1A;      /* warm near-black for dark bands */
-  --text: #1B1A17;         /* warm near-black */
-  --text-muted: #6E6A62;   /* subtext & descriptions */
-  --border: rgba(27, 26, 23, 0.08);  /* soft, low-contrast */
+  --bg: #EFEFEC;           /* neutral greige base (not white, not brown) */
+  --bg-alt: #E7E7E3;       /* subtle deeper tone for alternating sections */
+  --surface: #F6F6F3;      /* cards, gently lifted */
+  --bg-dark: #1C1C1A;      /* neutral charcoal for dark bands */
+  --text: #1C1C1A;         /* neutral near-black */
+  --text-muted: #6B6B66;   /* neutral subtext */
+  --border: rgba(28, 28, 26, 0.08);  /* soft, low-contrast */
 
   --accent: #C75B39;       /* PLACEHOLDER — match to logo */
   --accent-hover: #A8482B; /* darker on hover */

@@ -1,4 +1,4 @@
-import { Navbar } from "@/components/layout/Navbar";
+import { BubbleNav } from "@/components/layout/BubbleNav";
 import { Footer } from "@/components/layout/Footer";
 import CookieBanner from "./cookie-settings/page";
 
@@ -8,8 +8,8 @@ export default function MarketingLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen flex flex-col" style={{ background: "var(--bg)" }}>
-      <Navbar />
+    <div className="min-h-screen flex flex-col">
+      <BubbleNav />
       <main className="flex-1">{children}</main>
       <Footer />
       <CookieBanner></CookieBanner>

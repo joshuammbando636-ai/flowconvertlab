@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Hero } from "@/components/home/Hero";
 import { Features } from "@/components/home/Features";
-import { FinalCTA } from "@/components/home/FinalCTA";
+import { ReviewsSection } from "@/components/home/ReviewsSection";
 
 export const metadata: Metadata = {
   title: "FlowconvertLab — Turn website visitors into customers with LiveChat",
@@ -15,7 +15,7 @@ export default function HomePage() {
     <>
       <Hero />
       <Features />
-      <FinalCTA />
+      <ReviewsSection />
     </>
   );
 }

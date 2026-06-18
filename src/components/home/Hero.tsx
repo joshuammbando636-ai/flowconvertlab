@@ -44,7 +44,7 @@ export function Hero() {
   );
 
   return (
-    <section ref={root} className="relative w-full h-[92vh] min-h-[560px] overflow-hidden">
+    <section ref={root} className="relative w-full h-screen min-h-[600px] overflow-hidden">
       {/* Full-bleed image */}
       <Image
         src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=2000&q=80"

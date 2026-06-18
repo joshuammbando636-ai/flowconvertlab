@@ -48,42 +48,53 @@ function Card({ tool, active, onActivate }: { tool: Tool; active: boolean; onAct
       rel={AFFILIATE_REL}
       onMouseEnter={onActivate}
       onFocus={onActivate}
-      style={{ flexGrow: active ? 1.7 : 1, transition: "flex-grow 0.5s cubic-bezier(0.4,0,0.2,1)" }}
-      className="group relative block overflow-hidden rounded-[28px] basis-0 min-w-0 h-[320px] md:h-[440px] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
+      style={{ flexGrow: active ? 1.6 : 1, transition: "flex-grow 0.55s cubic-bezier(0.4, 0, 0.2, 1)" }}
+      className="group relative block basis-0 min-w-0 h-[320px] md:h-[440px] focus:outline-none"
     >
-      <Image src={tool.img} alt={tool.title} fill sizes="(max-width:768px) 100vw, 50vw" className="object-cover" />
-      <div
-        aria-hidden
-        className="absolute inset-0"
-        style={{ background: "linear-gradient(180deg, rgba(20,20,18,0.25) 0%, rgba(20,20,18,0.20) 45%, rgba(20,20,18,0.82) 100%)" }}
-      />
-
-      <div className="absolute inset-0 p-6 sm:p-7 flex flex-col">
-        <span className="self-start rounded-full border border-white/60 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-white">
-          {tool.label}
-        </span>
-
-        <h3 className="font-display font-bold text-white text-2xl sm:text-3xl mt-4 max-w-[14ch]">
-          {tool.title}
-        </h3>
-
-        <p
-          className={cn(
-            "mt-auto pr-16 text-sm leading-relaxed text-white/85 overflow-hidden transition-all duration-500",
-            active ? "max-h-48 opacity-100" : "max-h-48 opacity-100 md:max-h-0 md:opacity-0"
-          )}
-        >
-          {tool.desc}
-        </p>
+      {/* Rounded image card */}
+      <div className="absolute inset-0 rounded-[28px] overflow-hidden">
+        <Image src={tool.img} alt={tool.title} fill sizes="(max-width:768px) 100vw, 50vw" className="object-cover" />
+        <div
+          aria-hidden
+          className="absolute inset-0"
+          style={{ background: "linear-gradient(180deg, rgba(20,20,18,0.25) 0%, rgba(20,20,18,0.20) 45%, rgba(20,20,18,0.82) 100%)" }}
+        />
+        <div className="absolute inset-0 p-6 sm:p-7 flex flex-col">
+          <span className="self-start rounded-full border border-white/60 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-white">
+            {tool.label}
+          </span>
+          <h3 className="font-display font-bold text-white text-2xl sm:text-3xl mt-4 max-w-[14ch]">{tool.title}</h3>
+          <p
+            className={cn(
+              "mt-auto pr-24 text-sm leading-relaxed text-white/85 overflow-hidden transition-all duration-500",
+              active ? "max-h-48 opacity-100" : "max-h-48 opacity-100 md:max-h-0 md:opacity-0"
+            )}
+          >
+            {tool.desc}
+          </p>
+        </div>
       </div>
 
-      {/* Arrow — outline ↗ by default, solid accent → when active */}
+      {/* Angled (chamfered) corner — page-colored cut at bottom-right */}
+      <div
+        aria-hidden
+        className="absolute bottom-0 right-0"
+        style={{
+          width: 96,
+          height: 96,
+          background: "var(--bg-surface)",
+          clipPath: "polygon(100% 0, 100% 100%, 0 100%)",
+        }}
+      />
+
+      {/* Arrow sits in the cut: outline ↗ at rest, solid accent → when active */}
       <span
-        className={cn(
-          "absolute bottom-6 right-6 w-12 h-12 rounded-full flex items-center justify-center transition-colors duration-300",
-          active ? "text-white" : "text-white border border-white/60"
-        )}
-        style={active ? { background: "var(--accent)" } : undefined}
+        className="absolute bottom-4 right-4 w-12 h-12 rounded-full flex items-center justify-center transition-colors duration-300"
+        style={
+          active
+            ? { background: "var(--accent)", color: "#fff" }
+            : { border: "1px solid color-mix(in srgb, var(--text) 32%, transparent)", color: "var(--text)" }
+        }
       >
         {active ? <ArrowRight className="w-5 h-5" /> : <ArrowUpRight className="w-5 h-5" />}
       </span>
@@ -92,9 +103,10 @@ function Card({ tool, active, onActivate }: { tool: Tool; active: boolean; onAct
 }
 
 function Row({ pair }: { pair: Tool[] }) {
-  const [active, setActive] = useState(0);
+  // No card expanded at rest — only on hover/focus
+  const [active, setActive] = useState<number | null>(null);
   return (
-    <div className="flex flex-col md:flex-row gap-5" onMouseLeave={() => setActive(0)}>
+    <div className="flex flex-col md:flex-row gap-5" onMouseLeave={() => setActive(null)}>
       {pair.map((tool, i) => (
         <Card key={tool.title} tool={tool} active={active === i} onActivate={() => setActive(i)} />
       ))}

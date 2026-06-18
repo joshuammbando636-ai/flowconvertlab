@@ -22,12 +22,11 @@ export default function ToolsPage() {
   return (
     <>
       <PageHeader
-        eyebrow="The LiveChat suite"
         title="The complete customer conversation toolkit"
         subtitle="LiveChat and its add-ons work as one. Start with live chat, then layer on automation, ticketing, and self-service as you grow."
       />
 
-      <Section>
+      <Section surface>
         <ToolsShowcase />
       </Section>
     </>

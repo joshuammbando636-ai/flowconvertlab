@@ -51,8 +51,8 @@ function Card({ tool, active, onActivate }: { tool: Tool; active: boolean; onAct
       style={{ flexGrow: active ? 1.6 : 1, transition: "flex-grow 0.55s cubic-bezier(0.4, 0, 0.2, 1)" }}
       className="group relative block basis-0 min-w-0 h-[320px] md:h-[440px] focus:outline-none"
     >
-      {/* Rounded image card */}
-      <div className="absolute inset-0 rounded-[28px] overflow-hidden">
+      {/* Soft rounded image card */}
+      <div className="absolute inset-0 rounded-[36px] overflow-hidden">
         <Image src={tool.img} alt={tool.title} fill sizes="(max-width:768px) 100vw, 50vw" className="object-cover" />
         <div
           aria-hidden
@@ -66,7 +66,7 @@ function Card({ tool, active, onActivate }: { tool: Tool; active: boolean; onAct
           <h3 className="font-display font-bold text-white text-2xl sm:text-3xl mt-4 max-w-[14ch]">{tool.title}</h3>
           <p
             className={cn(
-              "mt-auto pr-24 text-sm leading-relaxed text-white/85 overflow-hidden transition-all duration-500",
+              "mt-auto pr-16 text-sm leading-relaxed text-white/85 overflow-hidden transition-all duration-500",
               active ? "max-h-48 opacity-100" : "max-h-48 opacity-100 md:max-h-0 md:opacity-0"
             )}
           >
@@ -75,25 +75,13 @@ function Card({ tool, active, onActivate }: { tool: Tool; active: boolean; onAct
         </div>
       </div>
 
-      {/* Angled (chamfered) corner — page-colored cut at bottom-right */}
-      <div
-        aria-hidden
-        className="absolute bottom-0 right-0"
-        style={{
-          width: 96,
-          height: 96,
-          background: "var(--bg-surface)",
-          clipPath: "polygon(100% 0, 100% 100%, 0 100%)",
-        }}
-      />
-
-      {/* Arrow sits in the cut: outline ↗ at rest, solid accent → when active */}
+      {/* Arrow sits OUTSIDE the card at the bottom-right corner */}
       <span
-        className="absolute bottom-4 right-4 w-12 h-12 rounded-full flex items-center justify-center transition-colors duration-300"
+        className="absolute bottom-0 right-0 translate-x-[20%] translate-y-[20%] w-12 h-12 rounded-full flex items-center justify-center transition-colors duration-300"
         style={
           active
             ? { background: "var(--accent)", color: "#fff" }
-            : { border: "1px solid color-mix(in srgb, var(--text) 32%, transparent)", color: "var(--text)" }
+            : { background: "var(--bg)", border: "1px solid color-mix(in srgb, var(--text) 28%, transparent)", color: "var(--text)" }
         }
       >
         {active ? <ArrowRight className="w-5 h-5" /> : <ArrowUpRight className="w-5 h-5" />}

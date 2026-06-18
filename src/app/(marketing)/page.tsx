@@ -1,13 +1,6 @@
 import type { Metadata } from "next";
 import { Hero } from "@/components/home/Hero";
-import { TrustStrip } from "@/components/home/TrustStrip";
-import { StatBand } from "@/components/home/StatBand";
-import { ProblemSolution } from "@/components/home/ProblemSolution";
 import { Features } from "@/components/home/Features";
-import { HowItWorks } from "@/components/home/HowItWorks";
-import { WhyLiveChat } from "@/components/home/WhyLiveChat";
-import { ReviewsSection } from "@/components/home/ReviewsSection";
-import { FAQ } from "@/components/home/FAQ";
 import { FinalCTA } from "@/components/home/FinalCTA";
 
 export const metadata: Metadata = {
@@ -21,14 +14,7 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <TrustStrip />
-      <StatBand />
-      <ProblemSolution />
       <Features />
-      <HowItWorks />
-      <WhyLiveChat />
-      <ReviewsSection />
-      <FAQ />
       <FinalCTA />
     </>
   );

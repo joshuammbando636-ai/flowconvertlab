@@ -1,10 +1,3 @@
 export { Hero } from "./Hero";
-export { TrustStrip } from "./TrustStrip";
-export { StatBand } from "./StatBand";
-export { ProblemSolution } from "./ProblemSolution";
 export { Features } from "./Features";
-export { HowItWorks } from "./HowItWorks";
-export { WhyLiveChat } from "./WhyLiveChat";
-export { ReviewsSection } from "./ReviewsSection";
-export { FAQ } from "./FAQ";
 export { FinalCTA } from "./FinalCTA";

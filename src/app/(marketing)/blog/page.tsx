@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import fs from "fs";
 import path from "path";
 import { Reveal } from "@/components/ui/Reveal";
+import { cardColor, cardImage } from "@/lib/blog";
 
 interface Post {
   slug: string;
@@ -27,19 +29,6 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://www.flowconvertlab.com/blog" },
 };
 
-// Varied, Linktree-style card colors (cycled per card)
-const CARD_COLORS = [
-  "#4F7CFF", // blue
-  "#7C2D3A", // maroon
-  "#E84C8A", // pink
-  "#2FBF71", // green
-  "#C026D3", // magenta
-  "#C75B39", // terracotta
-  "#6D28D9", // purple
-  "#0EA5A4", // teal
-  "#E8A23D", // amber
-];
-
 export default async function BlogPage() {
   const posts = await getBlogPosts();
 
@@ -50,15 +39,22 @@ export default async function BlogPage() {
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10 sm:gap-y-12">
           {posts.map((post, i) => {
-            const color = CARD_COLORS[i % CARD_COLORS.length];
+            const color = cardColor(i);
             return (
             <Reveal key={post.slug} delay={(i % 3) * 70}>
               <Link href={`/blog/${post.slug}`} className="group block">
-                {/* Color card (Linktree-style) */}
+                {/* Image card (Linktree-style) */}
                 <div
                   className="relative aspect-[4/3] rounded-2xl overflow-hidden transition-transform duration-300 group-hover:-translate-y-1"
                   style={{ background: color }}
                 >
+                  <Image
+                    src={cardImage(i)}
+                    alt={post.title}
+                    fill
+                    sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                  />
                   <span
                     className="absolute top-3 left-3 rounded-full bg-white/95 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.1em]"
                     style={{ color }}

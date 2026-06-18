@@ -58,7 +58,8 @@ html {
 
 html, body {
   max-width: 100vw;
-  overflow-x: hidden;
+  /* clip (not hidden) prevents a scroll container that would break position: sticky */
+  overflow-x: clip;
 }
 
 body {
@@ -210,6 +211,11 @@ html.lenis, html.lenis body { height: auto; }
 
 /* Blog article headings: offset anchor jumps below the fixed navbar */
 .blog-article h2 { scroll-margin-top: 110px; }
+/* The article body repeats its own title + category/tag labels — hide them,
+   the page already renders the title and we don't show category tags. */
+.blog-article h1,
+.blog-article .meta,
+.blog-article .tag { display: none; }
 
 /* ─── Reduced motion ─────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {

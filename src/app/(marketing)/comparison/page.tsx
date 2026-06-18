@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Section } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
-import { CTAButton } from "@/components/ui/CTAButton";
-import { AFFILIATE_DISCLOSURE_SHORT, LIVECHAT_PRICING_URL } from "@/lib/constants";
+import { ImageCtaBand } from "@/components/ui/ImageCtaBand";
+import { LIVECHAT_PRICING_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "LiveChat vs Intercom vs Tidio vs Zendesk",
@@ -33,7 +33,6 @@ export default function ComparisonPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Honest comparison"
         title="LiveChat vs Intercom vs Tidio vs Zendesk"
         subtitle="Four popular options, compared honestly on what actually matters."
       />
@@ -101,11 +100,14 @@ export default function ComparisonPage() {
           </div>
         </Reveal>
 
-        <Reveal className="text-center mt-10">
-          <CTAButton size="lg">Try LiveChat free</CTAButton>
-          <p className="text-xs mt-4" style={{ color: "var(--text-muted)" }}>{AFFILIATE_DISCLOSURE_SHORT}</p>
-        </Reveal>
       </Section>
+
+      <ImageCtaBand
+        image="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=2000&q=80"
+        title="The polished platform where chat drives revenue"
+        subtitle="See why most businesses stick with LiveChat — try it free for 14 days."
+        ctaLabel="Try LiveChat Free"
+      />
     </>
   );
 }

@@ -2,7 +2,7 @@ import { AFFILIATE_URL, AFFILIATE_REL, AFFILIATE_DISCLOSURE_SHORT } from "@/lib/
 
 export function BlogSidebarCta() {
   return (
-    <div className="rounded-2xl overflow-hidden" style={{ background: "#0B1220", border: "1px solid var(--border)" }}>
+    <div className="rounded-2xl overflow-hidden" style={{ background: "var(--bg-dark)", border: "1px solid var(--border)" }}>
       <img
         src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=800&q=80"
         alt="A support team turning conversations into customers"

@@ -3,22 +3,25 @@
 @tailwind utilities;
 
 /* ─── Design Tokens ─────────────────────────────────────────────
-   Light premium SaaS. Neutral base + ONE swappable brand accent.
-   Change --accent (and its hover/soft/glow) to rebrand the site. */
+   Warm, blended look. Neutral warm base + ONE swappable brand accent.
+   Swap --accent (and hover/soft/glow) to the logo color to rebrand. */
 :root {
-  --bg: #FFFFFF;            /* page background */
-  --bg-surface: #F6F8FA;   /* cards, strips, raised surfaces */
-  --bg-elevated: #FFFFFF;  /* floating cards on grey surfaces */
-  --text: #0B1220;         /* ink — headings & body */
-  --text-muted: #5B6675;   /* subtext & descriptions */
-  --border: #E6EAF0;       /* hairlines & dividers */
+  --bg: #F4F1EC;           /* warm off-white base (not pure white) */
+  --bg-alt: #ECE7DE;       /* subtle deeper tone for alternating sections */
+  --surface: #FBF9F5;      /* cards, gently lifted */
+  --bg-dark: #211E1A;      /* warm near-black for dark bands */
+  --text: #1B1A17;         /* warm near-black */
+  --text-muted: #6E6A62;   /* subtext & descriptions */
+  --border: rgba(27, 26, 23, 0.08);  /* soft, low-contrast */
 
-  --accent: #0F766E;       /* deep teal — CTAs, links, highlights */
-  --accent-hover: #0B5E57; /* darker teal on hover */
-  --accent-soft: #ECFDF9;  /* tint background for badges/sections */
-  --accent-glow: rgba(15, 118, 110, 0.30);
+  --accent: #C75B39;       /* PLACEHOLDER — match to logo */
+  --accent-hover: #A8482B; /* darker on hover */
+  --accent-soft: rgba(199, 91, 57, 0.10);
+  --accent-glow: rgba(199, 91, 57, 0.28);
 
-  /* Back-compat aliases (existing components reference --primary) */
+  /* Back-compat aliases (existing components reference these names) */
+  --bg-surface: var(--surface);
+  --bg-elevated: var(--surface);
   --primary: var(--accent);
   --primary-glow: var(--accent-glow);
 
@@ -26,19 +29,20 @@
   --nav-height: 72px;
 }
 
-/* Optional dark mode — kept wired for next-themes */
+/* Optional dark mode — kept wired for next-themes, warm variant */
 .dark {
-  --bg: #0B1220;
-  --bg-surface: #131C2B;
-  --bg-elevated: #1A2436;
-  --text: #E8EDF4;
-  --text-muted: #9AA7B8;
-  --border: #243044;
+  --bg: #1B1A17;
+  --bg-alt: #221F1B;
+  --surface: #262320;
+  --bg-dark: #141210;
+  --text: #F4F1EC;
+  --text-muted: #B3ACA1;
+  --border: rgba(244, 241, 236, 0.10);
 
-  --accent: #2DD4BF;       /* brighter teal for contrast on dark */
-  --accent-hover: #5EEAD4;
-  --accent-soft: rgba(45, 212, 191, 0.12);
-  --accent-glow: rgba(45, 212, 191, 0.35);
+  --accent: #E0764F;       /* warmer, brighter on dark */
+  --accent-hover: #EC8D6B;
+  --accent-soft: rgba(224, 118, 79, 0.14);
+  --accent-glow: rgba(224, 118, 79, 0.35);
 }
 
 /* ─── Base ───────────────────────────────────────────────────── */
@@ -58,7 +62,9 @@ html, body {
 }
 
 body {
-  background-color: var(--bg);
+  /* gentle top-to-bottom tonal shift so sections blend instead of stacking */
+  background: var(--bg);
+  background-image: linear-gradient(180deg, var(--bg) 0%, var(--bg-alt) 100%);
   color: var(--text);
   font-family: var(--font-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -94,7 +100,7 @@ h1, h2, h3, h4, h5 {
   .border-subtle { border-color: var(--border); }
 
   .glass {
-    background: rgba(255, 255, 255, 0.72);
+    background: rgba(251, 249, 245, 0.72);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
     border: 1px solid var(--border);
@@ -141,14 +147,16 @@ h1, h2, h3, h4, h5 {
   .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
 
   .card {
-    background-color: var(--bg-elevated);
+    background-color: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius);
+    /* soft, diffuse depth instead of hard edges */
+    box-shadow: 0 1px 2px rgba(27, 26, 23, 0.03), 0 10px 30px rgba(27, 26, 23, 0.05);
     transition: box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
                 transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
   .card:hover {
-    box-shadow: 0 18px 40px rgba(11, 18, 32, 0.08);
+    box-shadow: 0 4px 10px rgba(27, 26, 23, 0.05), 0 22px 48px rgba(27, 26, 23, 0.09);
     transform: translateY(-4px);
   }
 
@@ -176,7 +184,7 @@ h1, h2, h3, h4, h5 {
   .nav-link:hover::after, .nav-link[data-active="true"]::after { width: 100%; }
 
   .glass-nav {
-    background: rgba(255, 255, 255, 0.78);
+    background: rgba(251, 249, 245, 0.78);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border-bottom: 1px solid var(--border);

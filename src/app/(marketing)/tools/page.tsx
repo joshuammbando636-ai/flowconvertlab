@@ -93,7 +93,7 @@ export default function ToolsPage() {
       {/* Closing band */}
       <Section>
         <Reveal>
-          <div className="relative overflow-hidden rounded-3xl px-6 py-12 sm:px-10 sm:py-16 text-center" style={{ background: "#0B1220" }}>
+          <div className="relative overflow-hidden rounded-3xl px-6 py-12 sm:px-10 sm:py-16 text-center" style={{ background: "var(--bg-dark)" }}>
             <div aria-hidden className="pointer-events-none absolute inset-0" style={{ background: "radial-gradient(60% 70% at 50% 0%, var(--accent-glow) 0%, transparent 70%)" }} />
             <div className="relative">
               <h2 className="font-display font-bold text-white mb-4" style={{ fontSize: "clamp(1.75rem, 4vw, 2.5rem)", lineHeight: "1.15" }}>

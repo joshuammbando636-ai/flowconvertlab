@@ -9,7 +9,7 @@ export function FinalCTA() {
         <Reveal>
           <div
             className="relative overflow-hidden rounded-3xl px-6 py-14 sm:px-10 sm:py-20 text-center"
-            style={{ background: "#0B1220" }}
+            style={{ background: "var(--bg-dark)" }}
           >
             <div
               aria-hidden

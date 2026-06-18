@@ -12,7 +12,7 @@ const QUICK_LINKS = [
 
 export function Footer() {
   return (
-    <footer className="relative pt-16 sm:pt-20 pb-8 text-white" style={{ background: "#0B1220" }}>
+    <footer className="relative pt-16 sm:pt-20 pb-8 text-white" style={{ background: "var(--bg-dark)" }}>
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid gap-10 lg:gap-16 md:grid-cols-[1.4fr_1fr_1fr]">
           {/* Brand */}

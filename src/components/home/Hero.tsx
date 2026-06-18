@@ -1,109 +1,87 @@
-import { Reveal } from "@/components/ui/Reveal";
+"use client";
+
+import { useRef } from "react";
+import Image from "next/image";
+import { gsap } from "gsap";
+import { SplitText } from "gsap/SplitText";
+import { useGSAP } from "@gsap/react";
 import { CTAButton } from "@/components/ui/CTAButton";
-import { CTA_SECONDARY_LABEL, AFFILIATE_DISCLOSURE_SHORT } from "@/lib/constants";
-import { Bot, MessageSquare } from "lucide-react";
+
+gsap.registerPlugin(SplitText, useGSAP);
 
 export function Hero() {
+  const root = useRef<HTMLElement>(null);
+  const headingRef = useRef<HTMLHeadingElement>(null);
+
+  useGSAP(
+    () => {
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (reduce || !headingRef.current) return;
+
+      const split = new SplitText(headingRef.current, { type: "words" });
+      gsap.set(headingRef.current, { opacity: 1 });
+      gsap.from(split.words, {
+        yPercent: 120,
+        opacity: 0,
+        duration: 1,
+        ease: "back.out(1.5)", // springy
+        stagger: 0.08,
+        delay: 0.15,
+      });
+
+      gsap.from(".hero-fade", {
+        y: 24,
+        opacity: 0,
+        duration: 0.9,
+        ease: "power3.out",
+        stagger: 0.15,
+        delay: 0.7,
+      });
+
+      return () => split.revert();
+    },
+    { scope: root }
+  );
+
   return (
-    <section
-      className="relative overflow-hidden"
-      style={{ paddingTop: "calc(var(--nav-height) + 3rem)" }}
-    >
-      {/* Soft accent wash, decorative only */}
+    <section ref={root} className="relative w-full h-[92vh] min-h-[560px] overflow-hidden">
+      {/* Full-bleed image */}
+      <Image
+        src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=2000&q=80"
+        alt="A team turning conversations into customers"
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover"
+      />
+      {/* Readability gradient */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10"
-        style={{
-          background:
-            "radial-gradient(60% 50% at 70% 0%, var(--accent-soft) 0%, transparent 70%)",
-        }}
+        className="absolute inset-0"
+        style={{ background: "linear-gradient(180deg, rgba(20,20,18,0.30) 0%, rgba(20,20,18,0.15) 40%, rgba(20,20,18,0.75) 100%)" }}
       />
-      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pb-16 sm:pb-20 lg:pb-24">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Copy */}
-          <Reveal>
-            <span className="section-label mb-5">Live chat + AI chatbot, in one platform</span>
+
+      {/* Content anchored to the bottom, Basel-style */}
+      <div className="absolute inset-x-0 bottom-0">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 pb-12 sm:pb-16 lg:pb-20">
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
             <h1
-              className="font-display font-bold mt-5"
-              style={{
-                fontSize: "clamp(2.25rem, 5.5vw, 3.75rem)",
-                lineHeight: "1.08",
-                letterSpacing: "-0.025em",
-                color: "var(--text)",
-              }}
+              ref={headingRef}
+              className="font-display font-bold text-white leading-[0.95] opacity-0"
+              style={{ fontSize: "clamp(3rem, 11vw, 8.5rem)", letterSpacing: "-0.03em" }}
             >
-              Turn website visitors into customers — automatically
+              Turn visitors<br />into customers
             </h1>
-            <p
-              className="mt-5 text-base sm:text-lg leading-relaxed max-w-xl"
-              style={{ color: "var(--text-muted)" }}
-            >
-              Add LiveChat&apos;s AI chatbot and live chat to your site in minutes. Every
-              visitor gets an instant answer, every lead gets captured, and your team only
-              handles the conversations that actually matter.
-            </p>
 
-            <div className="mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4">
-              <CTAButton size="lg" />
-              <a
-                href="#how-it-works"
-                className="inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 sm:py-4 text-base font-semibold border transition-all duration-200 hover:-translate-y-0.5"
-                style={{ borderColor: "var(--border)", color: "var(--text)", background: "var(--bg-elevated)" }}
-              >
-                {CTA_SECONDARY_LABEL}
-              </a>
-            </div>
-
-            <p className="mt-5 text-sm" style={{ color: "var(--text-muted)" }}>
-              No credit card required · ~10-minute setup · Works with WordPress, Shopify &amp; 200+ tools
-            </p>
-            <p className="mt-2 text-xs" style={{ color: "var(--text-muted)" }}>
-              {AFFILIATE_DISCLOSURE_SHORT}
-            </p>
-          </Reveal>
-
-          {/* UI mockup (no stock photo) */}
-          <Reveal delay={120} className="lg:justify-self-end w-full max-w-md mx-auto">
-            <div
-              className="rounded-2xl border p-5 sm:p-6"
-              style={{ background: "var(--bg-elevated)", borderColor: "var(--border)", boxShadow: "0 24px 60px rgba(11,18,32,0.10)" }}
-            >
-              <div className="flex items-center gap-2 pb-4 mb-4 border-b" style={{ borderColor: "var(--border)" }}>
-                <span className="w-2.5 h-2.5 rounded-full" style={{ background: "var(--accent)" }} />
-                <span className="text-sm font-semibold" style={{ color: "var(--text)" }}>Chat with us</span>
-                <span className="ml-auto text-xs px-2 py-0.5 rounded-full" style={{ background: "var(--accent-soft)", color: "var(--accent)" }}>Online</span>
-              </div>
-
-              <div className="space-y-3">
-                <div className="flex items-start gap-2">
-                  <span className="mt-0.5 w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: "var(--accent-soft)" }}>
-                    <Bot className="w-4 h-4" style={{ color: "var(--accent)" }} />
-                  </span>
-                  <p className="text-sm rounded-2xl rounded-tl-sm px-3.5 py-2.5 max-w-[80%]" style={{ background: "var(--bg-surface)", color: "var(--text)" }}>
-                    Hi! 👋 Looking for the right plan? I can help you find it in 30 seconds.
-                  </p>
-                </div>
-                <div className="flex items-start gap-2 justify-end">
-                  <p className="text-sm rounded-2xl rounded-tr-sm px-3.5 py-2.5 max-w-[80%] text-white" style={{ background: "var(--accent)" }}>
-                    Do you integrate with Shopify?
-                  </p>
-                </div>
-                <div className="flex items-start gap-2">
-                  <span className="mt-0.5 w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: "var(--accent-soft)" }}>
-                    <Bot className="w-4 h-4" style={{ color: "var(--accent)" }} />
-                  </span>
-                  <p className="text-sm rounded-2xl rounded-tl-sm px-3.5 py-2.5 max-w-[80%]" style={{ background: "var(--bg-surface)", color: "var(--text)" }}>
-                    Yes — plus 200+ more. Want me to connect you to a specialist?
-                  </p>
-                </div>
-              </div>
-
-              <div className="mt-4 flex items-center gap-2 rounded-full border px-4 py-2.5" style={{ borderColor: "var(--border)" }}>
-                <MessageSquare className="w-4 h-4" style={{ color: "var(--text-muted)" }} />
-                <span className="text-sm" style={{ color: "var(--text-muted)" }}>Type your message…</span>
+            <div className="lg:max-w-sm lg:pb-3">
+              <p className="hero-fade text-lg sm:text-xl text-white/90 leading-relaxed mb-6">
+                Welcome to AI-powered live chat that turns conversations into customers.
+              </p>
+              <div className="hero-fade">
+                <CTAButton size="lg">Try LiveChat Free</CTAButton>
               </div>
             </div>
-          </Reveal>
+          </div>
         </div>
       </div>
     </section>

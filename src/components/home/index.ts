@@ -5,6 +5,6 @@ export { ProblemSolution } from "./ProblemSolution";
 export { Features } from "./Features";
 export { HowItWorks } from "./HowItWorks";
 export { WhyLiveChat } from "./WhyLiveChat";
-export { ReviewsTeaser } from "./ReviewsTeaser";
+export { ReviewsSection } from "./ReviewsSection";
 export { FAQ } from "./FAQ";
 export { FinalCTA } from "./FinalCTA";

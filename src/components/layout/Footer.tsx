@@ -4,9 +4,7 @@ import { AFFILIATE_DISCLOSURE_FULL } from "@/lib/constants";
 const QUICK_LINKS = [
   { href: "/", label: "Home" },
   { href: "/tools", label: "Tools" },
-  { href: "/reviews", label: "Reviews" },
   { href: "/comparison", label: "Comparison" },
-  { href: "/guide", label: "Guide" },
   { href: "/blog", label: "Blog" },
 ];
 

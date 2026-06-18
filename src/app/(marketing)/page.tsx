@@ -6,7 +6,7 @@ import { ProblemSolution } from "@/components/home/ProblemSolution";
 import { Features } from "@/components/home/Features";
 import { HowItWorks } from "@/components/home/HowItWorks";
 import { WhyLiveChat } from "@/components/home/WhyLiveChat";
-import { ReviewsTeaser } from "@/components/home/ReviewsTeaser";
+import { ReviewsSection } from "@/components/home/ReviewsSection";
 import { FAQ } from "@/components/home/FAQ";
 import { FinalCTA } from "@/components/home/FinalCTA";
 
@@ -27,7 +27,7 @@ export default function HomePage() {
       <Features />
       <HowItWorks />
       <WhyLiveChat />
-      <ReviewsTeaser />
+      <ReviewsSection />
       <FAQ />
       <FinalCTA />
     </>

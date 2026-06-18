@@ -27,6 +27,19 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://www.flowconvertlab.com/blog" },
 };
 
+// Varied, Linktree-style card colors (cycled per card)
+const CARD_COLORS = [
+  "#4F7CFF", // blue
+  "#7C2D3A", // maroon
+  "#E84C8A", // pink
+  "#2FBF71", // green
+  "#C026D3", // magenta
+  "#C75B39", // terracotta
+  "#6D28D9", // purple
+  "#0EA5A4", // teal
+  "#E8A23D", // amber
+];
+
 export default async function BlogPage() {
   const posts = await getBlogPosts();
 
@@ -36,17 +49,19 @@ export default async function BlogPage() {
         <h1 className="sr-only">FlowconvertLab Blog</h1>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10 sm:gap-y-12">
-          {posts.map((post, i) => (
+          {posts.map((post, i) => {
+            const color = CARD_COLORS[i % CARD_COLORS.length];
+            return (
             <Reveal key={post.slug} delay={(i % 3) * 70}>
               <Link href={`/blog/${post.slug}`} className="group block">
                 {/* Color card (Linktree-style) */}
                 <div
                   className="relative aspect-[4/3] rounded-2xl overflow-hidden transition-transform duration-300 group-hover:-translate-y-1"
-                  style={{ background: post.color }}
+                  style={{ background: color }}
                 >
                   <span
                     className="absolute top-3 left-3 rounded-full bg-white/95 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.1em]"
-                    style={{ color: post.color }}
+                    style={{ color }}
                   >
                     {post.category}
                   </span>
@@ -70,7 +85,8 @@ export default async function BlogPage() {
                 </h2>
               </Link>
             </Reveal>
-          ))}
+            );
+          })}
         </div>
       </div>
     </div>

@@ -12,7 +12,7 @@ interface ImageCtaBandProps {
 /** Full-bleed image CTA band — big headline over a photo, with the affiliate CTA. */
 export function ImageCtaBand({ image, title, subtitle, ctaLabel = "Try LiveChat Free" }: ImageCtaBandProps) {
   return (
-    <section className="relative w-full h-[70vh] min-h-[440px] overflow-hidden">
+    <section className="relative w-full h-screen min-h-[600px] overflow-hidden rounded-t-[40px]">
       <Image src={image} alt="" fill sizes="100vw" className="object-cover" />
       <div
         aria-hidden

@@ -1,7 +1,5 @@
 import { Reveal } from "@/components/ui/Reveal";
 import { Section } from "@/components/ui/Section";
-import { SectionHeader } from "@/components/ui/SectionHeader";
-import { CTAButton } from "@/components/ui/CTAButton";
 import { Bot, MessageCircle, Send, BarChart3, Plug, Inbox } from "lucide-react";
 
 const FEATURES = [
@@ -40,12 +38,6 @@ const FEATURES = [
 export function Features() {
   return (
     <Section id="features">
-      <SectionHeader
-        label="Features"
-        title="Everything you need to convert chats into customers"
-        subtitle="One dashboard. AI and humans working together."
-      />
-
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
         {FEATURES.map((f, i) => {
           const Icon = f.icon;
@@ -66,11 +58,6 @@ export function Features() {
           );
         })}
       </div>
-
-      {/* Affiliate CTA after features (Phase 5) */}
-      <Reveal className="text-center mt-12">
-        <CTAButton size="lg" />
-      </Reveal>
     </Section>
   );
 }

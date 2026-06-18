@@ -9,7 +9,7 @@ export const LIVECHAT_PRICING_URL = "https://www.livechat.com/pricing/";
 export const AFFILIATE_REL = "sponsored nofollow noopener";
 
 /** Reusable CTA labels (from the copy deck). */
-export const CTA_PRIMARY_LABEL = "Start your free 14-day trial";
+export const CTA_PRIMARY_LABEL = "Try LiveChat Free";
 export const CTA_SECONDARY_LABEL = "See how it works";
 export const CTA_MICROCOPY = "No credit card required · Live in ~10 minutes";
 

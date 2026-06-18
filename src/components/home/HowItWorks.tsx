@@ -1,7 +1,5 @@
 import { Reveal } from "@/components/ui/Reveal";
 import { Section } from "@/components/ui/Section";
-import { SectionHeader } from "@/components/ui/SectionHeader";
-import { CTAButton } from "@/components/ui/CTAButton";
 
 const STEPS = [
   {
@@ -29,12 +27,6 @@ const STEPS = [
 export function HowItWorks() {
   return (
     <Section id="how-it-works" surface>
-      <SectionHeader
-        label="How it works"
-        title="Live in four simple steps"
-        subtitle="No developer, no code headaches."
-      />
-
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
         {STEPS.map((s, i) => (
           <Reveal key={s.n} delay={i * 80}>
@@ -52,11 +44,6 @@ export function HowItWorks() {
           </Reveal>
         ))}
       </div>
-
-      {/* Step-section affiliate CTA (Phase 5) */}
-      <Reveal className="text-center mt-12">
-        <CTAButton size="lg" />
-      </Reveal>
     </Section>
   );
 }

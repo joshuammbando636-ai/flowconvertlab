@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
-import { Clock, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import fs from "fs";
 import path from "path";
-import { PageHeader } from "@/components/ui/PageHeader";
-import { Section } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 
 interface Post {
@@ -34,49 +31,48 @@ export default async function BlogPage() {
   const posts = await getBlogPosts();
 
   return (
-    <>
-      <PageHeader
-        eyebrow="Blog"
-        title="The FlowconvertLab Blog"
-        subtitle="Practical guides on live chat, AI chatbots, and converting more of your website traffic."
-      />
+    <div className="pb-20 sm:pb-24" style={{ paddingTop: "calc(var(--nav-height) + 3rem)" }}>
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 className="sr-only">FlowconvertLab Blog</h1>
 
-      <Section>
-        <div className="grid md:grid-cols-2 gap-5 sm:gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10 sm:gap-y-12">
           {posts.map((post, i) => (
-            <Reveal key={post.slug} delay={(i % 2) * 80}>
-              <Link href={`/blog/${post.slug}`} className="block h-full group">
-                <article className="card h-full p-6 sm:p-7 flex flex-col">
-                  <div className="flex flex-wrap items-center gap-3 mb-4">
-                    <span
-                      className="text-xs font-semibold uppercase tracking-widest px-2.5 py-1 rounded-full"
-                      style={{ background: "var(--accent-soft)", color: "var(--accent)" }}
-                    >
-                      {post.category}
-                    </span>
-                    <span className="text-xs flex items-center gap-1.5" style={{ color: "var(--text-muted)" }}>
-                      <Clock className="w-3.5 h-3.5" /> {post.readTime}
-                    </span>
-                  </div>
-                  <h2 className="font-display font-bold text-xl leading-snug mb-3" style={{ color: "var(--text)" }}>
+            <Reveal key={post.slug} delay={(i % 3) * 70}>
+              <Link href={`/blog/${post.slug}`} className="group block">
+                {/* Color card (Linktree-style) */}
+                <div
+                  className="relative aspect-[4/3] rounded-2xl overflow-hidden transition-transform duration-300 group-hover:-translate-y-1"
+                  style={{ background: post.color }}
+                >
+                  <span
+                    className="absolute top-3 left-3 rounded-full bg-white/95 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.1em]"
+                    style={{ color: post.color }}
+                  >
+                    {post.category}
+                  </span>
+                </div>
+
+                {/* Meta */}
+                <div className="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs" style={{ color: "var(--text-muted)" }}>
+                  <span>{post.date}</span>
+                  <span aria-hidden>·</span>
+                  <span>{post.readTime}</span>
+                </div>
+
+                {/* Title */}
+                <h2
+                  className="mt-2 font-display font-bold text-xl sm:text-2xl leading-snug transition-colors"
+                  style={{ color: "var(--text)" }}
+                >
+                  <span className="bg-[linear-gradient(currentColor,currentColor)] bg-[length:0%_2px] bg-no-repeat bg-left-bottom transition-[background-size] duration-300 group-hover:bg-[length:100%_2px]">
                     {post.title}
-                  </h2>
-                  <p className="text-sm leading-relaxed flex-1" style={{ color: "var(--text-muted)" }}>
-                    {post.excerpt}
-                  </p>
-                  <div className="flex items-center justify-between mt-5">
-                    <span className="text-sm font-semibold inline-flex items-center gap-1.5" style={{ color: "var(--accent)" }}>
-                      Read article
-                      <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
-                    </span>
-                    <span className="text-xs" style={{ color: "var(--text-muted)" }}>{post.date}</span>
-                  </div>
-                </article>
+                  </span>
+                </h2>
               </Link>
             </Reveal>
           ))}
         </div>
-      </Section>
-    </>
+      </div>
+    </div>
   );
 }

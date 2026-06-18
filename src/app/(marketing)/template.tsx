@@ -22,7 +22,7 @@ export default function MarketingTemplate({ children }: { children: React.ReactN
         style={{
           height: "120vh",
           background: "#2B2A27", // dark, slightly warm — blends with the greige palette
-          borderRadius: "0 0 50% 50% / 0 0 12% 12%", // curved bottom edge
+          borderRadius: "0 0 50% 50% / 0 0 30% 30%", // deep arc bottom edge
         }}
         initial={{ y: "0%", opacity: 1 }}
         animate={reduce ? { opacity: 0 } : { y: ["0%", "0%", "-125%"] }}

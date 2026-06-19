@@ -24,7 +24,7 @@ const TOOLS: Tool[] = [
     label: "AI · 24/7",
     title: "ChatBot",
     desc: "Automate answers to repetitive questions, qualify leads, and stay responsive even when you're offline. Connects to LiveChat in a few clicks — no coding. Best for teams drowning in the same questions over and over.",
-    img: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=1200&q=80",
+    img: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1200&q=80",
   },
   {
     label: "Ticketing",

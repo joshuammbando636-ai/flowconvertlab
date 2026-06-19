@@ -49,7 +49,7 @@ function Card({ tool, active, onActivate }: { tool: Tool; active: boolean; onAct
       onMouseEnter={onActivate}
       onFocus={onActivate}
       style={{ flexGrow: active ? 1.6 : 1, transition: "flex-grow 0.55s cubic-bezier(0.4, 0, 0.2, 1)" }}
-      className="group relative block basis-0 min-w-0 h-[320px] md:h-[440px] focus:outline-none"
+      className="group relative block min-w-0 h-[400px] md:basis-0 md:h-[440px] focus:outline-none"
     >
       {/* Soft rounded image card */}
       <div className="absolute inset-0 rounded-[36px] overflow-hidden">
@@ -60,14 +60,18 @@ function Card({ tool, active, onActivate }: { tool: Tool; active: boolean; onAct
           style={{ background: "linear-gradient(180deg, rgba(20,20,18,0.25) 0%, rgba(20,20,18,0.20) 45%, rgba(20,20,18,0.82) 100%)" }}
         />
         <div className="absolute inset-0 p-6 sm:p-7 flex flex-col">
-          <span className="self-start rounded-full border border-white/60 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-white">
+          <span className="glass-chip self-start rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em]">
             {tool.label}
           </span>
           <h3 className="font-display font-bold text-white text-2xl sm:text-3xl mt-4 max-w-[14ch]">{tool.title}</h3>
           <p
             className={cn(
-              "mt-auto pr-16 text-sm leading-relaxed text-white/85 overflow-hidden transition-all duration-500",
-              active ? "max-h-48 opacity-100" : "max-h-48 opacity-100 md:max-h-0 md:opacity-0"
+              "mt-auto text-sm leading-relaxed text-white/90",
+              // Mobile: always show, clamped so it never overflows the card.
+              "pr-20 line-clamp-4",
+              // Desktop: arrow is outside, reveal on hover.
+              "md:pr-0 md:line-clamp-none md:overflow-hidden md:transition-all md:duration-500",
+              active ? "md:max-h-48 md:opacity-100" : "md:max-h-0 md:opacity-0"
             )}
           >
             {tool.desc}
@@ -75,14 +79,15 @@ function Card({ tool, active, onActivate }: { tool: Tool; active: boolean; onAct
         </div>
       </div>
 
-      {/* Arrow sits OUTSIDE the card at the bottom-right corner */}
+      {/* Arrow — inside on mobile (solid accent), outside the corner on desktop */}
       <span
-        className="absolute bottom-0 right-0 translate-x-[20%] translate-y-[20%] w-12 h-12 rounded-full flex items-center justify-center transition-colors duration-300"
-        style={
+        className={cn(
+          "absolute w-12 h-12 rounded-full flex items-center justify-center transition-colors duration-300",
+          "bottom-5 right-5 md:bottom-0 md:right-0 md:translate-x-[20%] md:translate-y-[20%]",
           active
-            ? { background: "var(--accent)", color: "#fff" }
-            : { background: "var(--bg)", border: "1px solid color-mix(in srgb, var(--text) 28%, transparent)", color: "var(--text)" }
-        }
+            ? "bg-[var(--accent)] text-white"
+            : "bg-[var(--accent)] text-white md:bg-[var(--bg)] md:text-[var(--text)] md:border md:border-black/20"
+        )}
       >
         {active ? <ArrowRight className="w-5 h-5" /> : <ArrowUpRight className="w-5 h-5" />}
       </span>

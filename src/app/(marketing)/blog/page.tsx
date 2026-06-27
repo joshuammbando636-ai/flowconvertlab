@@ -43,9 +43,9 @@ export default async function BlogPage() {
             return (
             <Reveal key={post.slug} delay={(i % 3) * 70}>
               <Link href={`/blog/${post.slug}`} className="group block">
-                {/* Image card (Linktree-style) */}
+                {/* Glass card — frosted panel floats over a vibrant photo */}
                 <div
-                  className="relative aspect-[4/3] rounded-2xl overflow-hidden transition-transform duration-300 group-hover:-translate-y-1"
+                  className="relative aspect-[4/5] rounded-[28px] overflow-hidden transition-transform duration-300 group-hover:-translate-y-1.5"
                   style={{ background: color }}
                 >
                   <Image
@@ -53,32 +53,37 @@ export default async function BlogPage() {
                     alt={post.title}
                     fill
                     sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 33vw"
-                    className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.05]"
                   />
-                  <span
-                    className="absolute top-3 left-3 rounded-full bg-white/95 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.1em]"
-                    style={{ color }}
-                  >
+                  {/* gentle wash so the frosted panel reads as lifted glass */}
+                  <div
+                    aria-hidden
+                    className="absolute inset-0"
+                    style={{ background: "linear-gradient(180deg, rgba(20,20,18,0.10) 0%, rgba(20,20,18,0) 35%)" }}
+                  />
+
+                  {/* Category — translucent glass chip directly on the image */}
+                  <span className="glass-chip absolute top-4 left-4 rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.1em]">
                     {post.category}
                   </span>
-                </div>
 
-                {/* Meta */}
-                <div className="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs" style={{ color: "var(--text-muted)" }}>
-                  <span>{post.date}</span>
-                  <span aria-hidden>·</span>
-                  <span>{post.readTime}</span>
+                  {/* Frosted content panel */}
+                  <div className="glass-card absolute inset-x-3 bottom-3 rounded-[20px] p-4 sm:p-5">
+                    <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs" style={{ color: "var(--text-muted)" }}>
+                      <span>{post.date}</span>
+                      <span aria-hidden>·</span>
+                      <span>{post.readTime}</span>
+                    </div>
+                    <h2
+                      className="mt-1.5 font-display font-bold text-lg sm:text-xl leading-snug"
+                      style={{ color: "var(--text)" }}
+                    >
+                      <span className="bg-[linear-gradient(currentColor,currentColor)] bg-[length:0%_2px] bg-no-repeat bg-left-bottom transition-[background-size] duration-300 group-hover:bg-[length:100%_2px]">
+                        {post.title}
+                      </span>
+                    </h2>
+                  </div>
                 </div>
-
-                {/* Title */}
-                <h2
-                  className="mt-2 font-display font-bold text-xl sm:text-2xl leading-snug transition-colors"
-                  style={{ color: "var(--text)" }}
-                >
-                  <span className="bg-[linear-gradient(currentColor,currentColor)] bg-[length:0%_2px] bg-no-repeat bg-left-bottom transition-[background-size] duration-300 group-hover:bg-[length:100%_2px]">
-                    {post.title}
-                  </span>
-                </h2>
               </Link>
             </Reveal>
             );

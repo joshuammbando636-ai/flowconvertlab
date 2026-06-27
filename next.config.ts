@@ -8,6 +8,10 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: true,
   },
   images: {
+    // Serve modern formats (AVIF first, WebP fallback) and cache the optimized
+    // results aggressively — big LCP/bandwidth win for the photo-heavy pages.
+    formats: ["image/avif", "image/webp"],
+    minimumCacheTTL: 2678400, // 31 days
     remotePatterns: [
       { protocol: "https", hostname: "images.unsplash.com" },
       { protocol: "https", hostname: "avatars.githubusercontent.com" },

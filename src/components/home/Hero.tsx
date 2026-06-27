@@ -15,30 +15,54 @@ export function Hero() {
 
   useGSAP(
     () => {
+      const heading = headingRef.current;
+      if (!heading) return;
+
       const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      if (reduce || !headingRef.current) return;
+      if (reduce) {
+        // No animation — just make sure the heading is visible (it starts at
+        // opacity-0 for the animated path).
+        gsap.set(heading, { opacity: 1 });
+        return;
+      }
 
-      const split = new SplitText(headingRef.current, { type: "words" });
-      gsap.set(headingRef.current, { opacity: 1 });
-      gsap.from(split.words, {
-        yPercent: 120,
-        opacity: 0,
-        duration: 1,
-        ease: "back.out(1.5)", // springy
-        stagger: 0.08,
-        delay: 0.15,
-      });
+      let split: SplitText | null = null;
 
-      gsap.from(".hero-fade", {
-        y: 24,
-        opacity: 0,
-        duration: 0.9,
-        ease: "power3.out",
-        stagger: 0.15,
-        delay: 0.7,
-      });
+      // Smooth, weighted rise — no overshoot/bounce. Words slide up from behind
+      // a clipped line, so the reveal reads clean rather than springy.
+      const play = () => {
+        split = new SplitText(heading, { type: "lines,words", linesClass: "overflow-hidden" });
+        gsap.set(heading, { opacity: 1 });
+        gsap.from(split.words, {
+          yPercent: 100,
+          opacity: 0,
+          duration: 0.9,
+          ease: "power3.out",
+          stagger: 0.06,
+        });
+        gsap.from(".hero-fade", {
+          y: 16,
+          opacity: 0,
+          duration: 0.8,
+          ease: "power2.out",
+          stagger: 0.12,
+          delay: 0.25,
+        });
+      };
 
-      return () => split.revert();
+      // Start only once the preloader has lifted, so the entrance isn't wasted
+      // playing behind the loading screen. If the page was already ready before
+      // this mounted, play immediately.
+      if (document.documentElement.dataset.ready === "true") {
+        play();
+      } else {
+        window.addEventListener("site:ready", play, { once: true });
+      }
+
+      return () => {
+        window.removeEventListener("site:ready", play);
+        split?.revert();
+      };
     },
     { scope: root }
   );

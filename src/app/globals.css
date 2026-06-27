@@ -27,6 +27,17 @@
 
   --radius: 0.75rem;
   --nav-height: 72px;
+
+  /* ── Glassmorphism tokens (light) ──
+     Frosted panels float over vibrant images/colors. Higher opacity on
+     content panels keeps text ≥4.5:1; chips stay more translucent. */
+  --glass-blur: 16px;
+  --glass-panel: rgba(246, 246, 243, 0.72);  /* readable frosted surface */
+  --glass-border: rgba(255, 255, 255, 0.55); /* light reflection edge */
+  --glass-highlight: rgba(255, 255, 255, 0.65);
+  --glass-shadow: 0 8px 32px rgba(27, 26, 23, 0.14);
+  --glass-chip: rgba(20, 20, 18, 0.30);      /* dark frost, white text over images */
+  --glass-chip-border: rgba(255, 255, 255, 0.40);
 }
 
 /* Optional dark mode — kept wired for next-themes, warm variant */
@@ -43,6 +54,14 @@
   --accent-hover: #EC8D6B;
   --accent-soft: rgba(224, 118, 79, 0.14);
   --accent-glow: rgba(224, 118, 79, 0.35);
+
+  /* ── Glassmorphism tokens (dark) ── desaturated tonal variants, not inverts */
+  --glass-panel: rgba(30, 28, 25, 0.62);
+  --glass-border: rgba(255, 255, 255, 0.14);
+  --glass-highlight: rgba(255, 255, 255, 0.16);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.40);
+  --glass-chip: rgba(20, 20, 18, 0.42);
+  --glass-chip-border: rgba(255, 255, 255, 0.28);
 }
 
 /* ─── Base ───────────────────────────────────────────────────── */
@@ -104,6 +123,33 @@ h1, h2, h3, h4, h5 {
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
     border: 1px solid var(--border);
+  }
+
+  /* Frosted content panel — readable surface that floats over imagery.
+     saturate() revives color leaking through the blur; the inset highlight
+     gives the top edge a light-source reflection. */
+  .glass-card {
+    background: var(--glass-panel);
+    backdrop-filter: blur(var(--glass-blur)) saturate(150%);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(150%);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-highlight);
+  }
+
+  /* Small translucent label that sits directly on a photo (white text). */
+  .glass-chip {
+    background: var(--glass-chip);
+    backdrop-filter: blur(8px) saturate(140%);
+    -webkit-backdrop-filter: blur(8px) saturate(140%);
+    border: 1px solid var(--glass-chip-border);
+    color: #fff;
+  }
+
+  /* Graceful fallback where backdrop-filter is unsupported: lean opaque
+     so text never lands on a see-through panel. */
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .glass-card { background: var(--surface); }
+    .glass-chip { background: rgba(20, 20, 18, 0.72); }
   }
 
   /* Section vertical rhythm: 48 / 64 / 96 (mobile / tablet / desktop) */
@@ -191,15 +237,51 @@ h1, h2, h3, h4, h5 {
   }
 }
 
-/* ─── Page Transition Overlay ───────────────────────────────── */
-.page-transition-column {
+/* ─── Site Preloader (one-time load gate) ───────────────────── */
+.site-preloader {
   position: fixed;
-  top: 0;
-  height: 120vh;
+  inset: 0;
   z-index: 9999;
-  transform-origin: bottom;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  opacity: 1;
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.site-preloader.is-hidden {
+  opacity: 0;
   pointer-events: none;
+}
+.site-preloader__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+.site-preloader__bar {
+  position: relative;
+  width: 140px;
+  height: 3px;
+  border-radius: 999px;
+  background: var(--border);
+  overflow: hidden;
+}
+.site-preloader__bar::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 40%;
+  border-radius: inherit;
   background: var(--accent);
+  animation: preloader-slide 1.1s ease-in-out infinite;
+}
+@keyframes preloader-slide {
+  0%   { transform: translateX(-120%); }
+  100% { transform: translateX(320%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .site-preloader__bar::after { animation: none; width: 100%; }
 }
 
 /* ─── Lenis ──────────────────────────────────────────────────── */

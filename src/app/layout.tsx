@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { LenisProvider } from "@/components/providers/LenisProvider";
+import { Preloader } from "@/components/ui/Preloader";
+import { ChunkErrorReload } from "@/components/ui/ChunkErrorReload";
 import "./globals.css";
 
 const inter = Inter({
@@ -88,11 +90,14 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning className={`${inter.variable} ${spaceGrotesk.variable}`}>
       <head>
         <meta name="google-site-verification" content="google0971140ada99fd15" />
+        {/* Warm up the image CDN so hero/below-fold photos start fetching ASAP */}
+        <link rel="preconnect" href="https://images.unsplash.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://images.unsplash.com" />
       </head>
       <body>
-      
-          <LenisProvider>{children}</LenisProvider>
-        
+        <ChunkErrorReload />
+        <Preloader />
+        <LenisProvider>{children}</LenisProvider>
       </body>
     </html>
   );

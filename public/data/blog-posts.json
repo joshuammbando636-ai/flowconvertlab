@@ -1,5 +1,25 @@
 [
   {
+    "slug": "first-response-time-metric-businesses-get-wrong",
+    "title": "The first-response metric most businesses get wrong",
+    "excerpt": "You're probably tracking the wrong number. Here's the one that actually predicts lost sales.",
+    "category": "Strategy",
+    "readTime": "2 min read",
+    "date": "Jun 20, 2026",
+    "color": "#E8A23D",
+    "content": "<p>Most teams track average response time. It feels useful — but it hides the number that actually costs you sales.</p><h2>The metric everyone watches</h2><p>Average response time looks fine on a dashboard, but it blends your fastest replies with your slowest ones — and the slow ones are where deals die.</p><h2>The metric that matters more</h2><p>Track your <strong>90th-percentile</strong> first-response time instead — how slow your worst replies actually are. That's the number tied to lost sales and bad reviews.</p><h2>Why the gap happens</h2><p>Nights, weekends, and busy hours quietly create your worst-case delays, even if your average looks great during the day.</p><h2>Close the gap</h2><p>An AI chatbot answers instantly around the clock, so your worst-case response time stops being the problem.</p><p><a href=\"https://www.livechat.com/?a=w9-h_vpDg&utm_campaign=pp_livechat-default&utm_source=PP\" target=\"_blank\" rel=\"sponsored nofollow noopener\"><strong>Start your free 14-day trial</strong></a> — 14 days free, no credit card.</p>"
+  },
+  {
+    "slug": "train-chatbot-on-your-faqs-no-coding",
+    "title": "How to train your chatbot on your own FAQs (no coding)",
+    "excerpt": "Give your bot real answers from your own content — in about 15 minutes, no developer needed.",
+    "category": "AI Chatbots",
+    "readTime": "2 min read",
+    "date": "Jun 19, 2026",
+    "color": "#4F7CFF",
+    "content": "<p>A generic chatbot gives generic answers. Training it on your own FAQs is what makes it actually useful.</p><h2>Start with your real questions</h2><p>Pull the 10–15 questions your team answers most — shipping, pricing, setup, refunds. Those become your bot's first lessons.</p><h2>Feed it your existing content</h2><p>Point it at your help articles, product pages, or a simple FAQ doc. No coding — most platforms let you paste in text or a URL.</p><h2>Set the handoff rule</h2><p>Decide when the bot should stop guessing and bring in a human — usually after two failed attempts or a frustrated reply.</p><h2>Review and refine weekly</h2><p>Check what it couldn't answer and add those to its training. It gets sharper every week.</p><h2>Get started</h2><p>LiveChat's ChatBot connects to your content in a few clicks. <p><a href=\"https://www.livechat.com/?a=w9-h_vpDg&utm_campaign=pp_livechat-default&utm_source=PP\" target=\"_blank\" rel=\"sponsored nofollow noopener\"><strong>Start your free 14-day trial</strong></a> — 14 days free, no credit card.</p>"
+  },
+  {
     "slug": "5-ai-chatbot-wins-first-month",
     "title": "5 AI chatbot wins you'll see in the first month",
     "excerpt": "What actually changes once an AI chatbot is answering for you — in plain numbers, not hype.",

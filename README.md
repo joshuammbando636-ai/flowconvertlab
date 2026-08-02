@@ -186,6 +186,9 @@ It automatically gets the Navbar + Footer + PageTransition wrapper from `(market
 ### Add a blog post
 Add an entry to the `BLOG_POSTS` array in `blog/page.tsx` and create `src/app/(marketing)/blog/[slug]/page.tsx` for dynamic routing.
 
+### Weekly blog post automation
+`.github/workflows/weekly-blog-post.yml` runs every Sunday (08:17 UTC), drafts a new post with Claude (`scripts/generate-blog-post.mjs`), and opens a pull request against `public/data/blog-posts.json` for review — nothing publishes until the PR is merged. Requires an `ANTHROPIC_API_KEY` secret on the repo (Settings → Secrets and variables → Actions). Trigger a one-off run any time via the Actions tab → "Weekly blog post" → Run workflow.
+
 ---
 
 ## Performance Notes

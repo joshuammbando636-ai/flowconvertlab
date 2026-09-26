@@ -2,9 +2,10 @@ name: Weekly blog post
 
 on:
   schedule:
-    # 08:17 UTC every Sunday — off the top of the hour to avoid GitHub's
-    # scheduled-workflow congestion around :00.
+    # Twice a week — Sunday and Wednesday, both off the top of the hour to
+    # avoid GitHub's scheduled-workflow congestion around :00.
     - cron: "17 8 * * 0"
+    - cron: "42 8 * * 3"
   workflow_dispatch: {}
 
 permissions:
